@@ -1,4 +1,5 @@
 # Tetris
+release - for start without qt
 
 arrow control:
 
