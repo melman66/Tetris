@@ -19,13 +19,20 @@ protected:
 
 private slots:
     void updateScoreLabel(int score);
+    void updateLevelLabel(int level);
     void restartGame();
 
 private:
+    void setupUi();
+    void applyStyles();
+    void connectSignals();
+
+    QWidget *m_centralWidget;
     GameEngine *m_engine;
     BoardView *m_boardView;
     NextPieceView *m_nextPieceView;
     QLabel *m_scoreLabel;
+    QLabel *m_levelLabel;
     QPushButton *m_pauseButton;
     QPushButton *m_restartButton;
 };

@@ -34,6 +34,7 @@ public:
 signals:
     void boardChanged();             // требуется перерисовка поля
     void scoreChanged(int score);    // изменился счёт
+    void levelChanged(int level);    // изменился уровень
     void nextPieceChanged();         // изменилась следующая фигура
     void gameOver();                 // игра окончена
     void gameStarted();              // новая игра началась
@@ -43,6 +44,7 @@ private:
     bool canPlacePiece(const Piece &piece, int dx = 0, int dy = 0) const;
     void lockCurrentPiece();
     void clearFullLines();
+    int newTime();
 
     Board m_board;
     std::unique_ptr<Piece> m_currentPiece;
@@ -51,4 +53,5 @@ private:
     bool m_gameOver;
     bool m_paused;
     QTimer m_timer;
+    int m_level;
 };

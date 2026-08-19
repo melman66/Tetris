@@ -1,11 +1,13 @@
 #include "gameengine.h"
 #include <QRandomGenerator>
+#include <QDebug>
 
 GameEngine::GameEngine(QObject *parent)
     : QObject(parent)
     , m_score(0)
     , m_gameOver(false)
     , m_paused(false)
+    , m_level(1)
 {
     connect(&m_timer, &QTimer::timeout, this, &GameEngine::tick);
 }
@@ -30,7 +32,7 @@ void GameEngine::start()
     emit boardChanged();
     emit gameStarted();   // уведомляем о старте новой игры
 
-    m_timer.start(500);   // интервал падения 500 мс
+    m_timer.start(newTime());   // интервал падения
 }
 
 void GameEngine::pause()
@@ -45,7 +47,7 @@ void GameEngine::resume()
 {
     if (!m_gameOver && m_paused) {
         m_paused = false;
-        m_timer.start(500);
+        m_timer.start(newTime());
     }
 }
 
@@ -214,8 +216,18 @@ void GameEngine::clearFullLines()
 
     if (linesCleared > 0) {
         // Начисление очков: 1 линия = 100, 2 = 300, 3 = 500, 4 = 800
-        int points[] = {0, 100, 300, 500, 800};
+        int points[] = {0, 1, 3, 5, 8};
         m_score += points[std::min(linesCleared, 4)];
+        if(m_level < 10) {
+            m_level = m_score / 5 + 1;
+            m_timer.setInterval(newTime());
+        }
         emit scoreChanged(m_score);
+        emit levelChanged(m_level);
     }
+}
+
+int GameEngine::newTime()
+{
+    return 1200 - m_level * 100;
 }

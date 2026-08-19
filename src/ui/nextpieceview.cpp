@@ -18,7 +18,7 @@ void NextPieceView::setPiece(const Piece *piece)
 void NextPieceView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.fillRect(rect(), QColor(240, 240, 240));
+    painter.fillRect(rect(), QColor(255, 255, 255, 50));
 
     if (!m_piece)
         return;
