@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include <QKeyEvent>
 #include <QFont>
+#include <QFontDatabase>
 #include <QWidget>
+#include <QFile>
+#include <QDirIterator>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupUi()
 {
+    // Установка шрифта для всех дочерних виджетов
+    setFont(QFont(myFont(), 18, QFont::Bold));
+
     // Основные свойства окна
     setWindowTitle("TETRIS");
     setFixedSize(680, 500);
@@ -97,10 +103,10 @@ void MainWindow::applyStyles()
     m_pauseButton->setStyleSheet(buttonStyle);
     m_restartButton->setStyleSheet(buttonStyle);
 
-    // Шрифт для кнопок
-    QFont buttonFont("Yu Gothic Light", 18, QFont::Bold);
-    m_pauseButton->setFont(buttonFont);
-    m_restartButton->setFont(buttonFont);
+    // Шрифт для всего текста
+    QFont m_font(myFont(), 18, QFont::Bold);
+    m_pauseButton->setFont(m_font);
+    m_restartButton->setFont(m_font);
 
     // Стиль надписи счёта и уровня
     const QString scoreAndLevelStyle(
@@ -114,10 +120,6 @@ void MainWindow::applyStyles()
 
     m_scoreLabel->setStyleSheet(scoreAndLevelStyle);
     m_levelLabel->setStyleSheet(scoreAndLevelStyle);
-
-    QFont scoreAndLevelFont("Yu Gothic UI Light", 18, QFont::Bold);
-    m_scoreLabel->setFont(scoreAndLevelFont);
-    m_levelLabel->setFont(scoreAndLevelFont);
 }
 
 void MainWindow::connectSignals()
@@ -157,6 +159,19 @@ void MainWindow::connectSignals()
     });
     connect(m_restartButton, &QPushButton::clicked,
             this, &MainWindow::restartGame);
+}
+
+QString MainWindow::myFont()
+{
+    QString fontFamily;
+    int fontId = QFontDatabase::addApplicationFont(":/res/src/Nouveau_IBM.ttf");
+    if (fontId != -1) {
+        fontFamily = QFontDatabase::applicationFontFamilies(fontId).at(0);
+    } else {
+        fontFamily = "Arial";
+    }
+
+    return fontFamily;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

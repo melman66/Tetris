@@ -13,6 +13,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    QString myFont();
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;

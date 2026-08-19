@@ -30,7 +30,7 @@ void BoardView::onGameStarted()
 void BoardView::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.fillRect(rect(), Qt::white);
+    painter.fillRect(rect(), QColor(255, 255, 255, 50));
 
     // Сетка
     painter.setPen(QPen(Qt::lightGray, 1));
@@ -75,10 +75,10 @@ void BoardView::paintEvent(QPaintEvent *)
 
         // Текст
         QFont font = painter.font();
-        font.setPointSize(24);
+        font.setPointSize(30);
         font.setBold(true);
         painter.setFont(font);
-        painter.setPen(Qt::white);
+        painter.setPen(QColor(100, 0, 0));
 
         QString gameOverText = "GAME OVER";
         QFontMetrics fm(font);

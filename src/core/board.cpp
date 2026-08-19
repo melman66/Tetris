@@ -9,7 +9,7 @@ bool Board::isCellEmpty(int x, int y) const
 {
     if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT)
         return false;
-    return !m_grid[y][x].isValid();   // пустая ячейка = невалидный QColor
+    return !m_grid[y][x].isValid();
 }
 
 void Board::setCell(int x, int y, const QColor &color)
@@ -22,7 +22,7 @@ QColor Board::cellColor(int x, int y) const
 {
     if (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT)
         return m_grid[y][x];
-    return QColor();   // невалидный цвет
+    return QColor();
 }
 
 bool Board::isLineFull(int y) const

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Nouveau_IBM.ttf</file>
+        <file>Nouveau_IBM_Stretch.ttf</file>
+    </qresource>
+</RCC>

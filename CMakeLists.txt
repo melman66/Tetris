@@ -5,6 +5,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
 qt_standard_project_setup()
 
+
 qt_add_executable(Tetris
     src/main.cpp
     src/core/board.h src/core/board.cpp
@@ -14,6 +15,14 @@ qt_add_executable(Tetris
     src/ui/boardview.h src/ui/boardview.cpp
     src/ui/nextpieceview.h src/ui/nextpieceview.cpp
     src/ui/mainwindow.h src/ui/mainwindow.cpp
+)
+
+qt_add_resources(Tetris "Resources"
+    PREFIX "/res"
+    FILES
+        src/Nouveau_IBM.ttf
+        src/Nouveau_IBM_Stretch.ttf
+        src/tet.ico
 )
 
 target_link_libraries(Tetris
