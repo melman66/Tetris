@@ -42,4 +42,15 @@ qt_generate_deploy_app_script(
     OUTPUT_SCRIPT deploy_script
     NO_UNSUPPORTED_PLATFORM_ERROR
 )
+
+if(WIN32)
+    set(ICO_FILE "${CMAKE_CURRENT_SOURCE_DIR}/src/tet.ico")  # путь к вашей иконке
+    set(RC_FILE "${CMAKE_CURRENT_BINARY_DIR}/app.rc")
+    file(WRITE ${RC_FILE}
+        "IDI_ICON1 ICON \"${ICO_FILE}\"\n"
+    )
+    target_sources(Tetris PRIVATE ${RC_FILE})
+endif()
+
+
 install(SCRIPT ${deploy_script})
