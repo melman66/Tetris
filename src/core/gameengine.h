@@ -38,6 +38,7 @@ signals:
     void nextPieceChanged();         // изменилась следующая фигура
     void gameOver();                 // игра окончена
     void gameStarted();              // новая игра началась
+    void pauseChanged();                    // игра поставлена на паузу
 
 private:
     void spawnNewPiece();

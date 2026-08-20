@@ -141,11 +141,17 @@ void MainWindow::connectSignals()
         m_nextPieceView->setPiece(m_engine->nextPiece());
     });
 
+    // Запуск игры
+    connect(m_engine, &GameEngine::gameStarted,
+            m_boardView, &BoardView::onGameStarted);
+
     // Оверлей Game Over
     connect(m_engine, &GameEngine::gameOver,
             m_boardView, &BoardView::onGameOver);
-    connect(m_engine, &GameEngine::gameStarted,
-            m_boardView, &BoardView::onGameStarted);
+
+    // Оверлей Pause
+    connect(m_engine, &GameEngine::pauseChanged,
+            m_boardView, &BoardView::onPause);
 
     // Кнопки
     connect(m_pauseButton, &QPushButton::clicked, this, [this]() {

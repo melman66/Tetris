@@ -40,6 +40,7 @@ void GameEngine::pause()
     if (!m_gameOver && !m_paused) {
         m_paused = true;
         m_timer.stop();
+        emit pauseChanged();
     }
 }
 
@@ -48,6 +49,7 @@ void GameEngine::resume()
     if (!m_gameOver && m_paused) {
         m_paused = false;
         m_timer.start(newTime());
+        emit pauseChanged();
     }
 }
 
